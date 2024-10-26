@@ -64,9 +64,11 @@ export default function New() {
 
   return (
     <Container>
-      {currentIndex == 0 && (
+      {currentIndex == 0 && !loading && (
         <Prompt onClick={handleNextClick} onChange={setInputText} />
       )}
+      {loading && <FinalLoad />}
+      {/* <FinalLoad /> */}
       {/* {loading && <div>SPINNER</div>} */}
       {currentIndex > 0 && (
         <Question
@@ -78,9 +80,7 @@ export default function New() {
         />
       )}
       {/* {currentIndex == questionData.length+1 && ()} */}
-      <FinalLoad></FinalLoad>
     </Container>
-
 
     // <Container>
     //   {/* <header className="mb-6">

@@ -1,3 +1,33 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.btn {
+  @apply rounded-md px-4 py-2 font-semibold shadow-md transition duration-200 ease-in-out;
+}
+
+/* Primary Button: Calming blue */
+.btn-primary {
+  @apply bg-blue-500 text-white;
+}
+
+.btn-primary:hover {
+  @apply bg-blue-600 shadow-lg;
+}
+
+/* Secondary Button: Soothing green */
+.btn-secondary {
+  @apply bg-green-500 text-white;
+}
+
+.btn-secondary:hover {
+  @apply bg-green-600 shadow-lg;
+}

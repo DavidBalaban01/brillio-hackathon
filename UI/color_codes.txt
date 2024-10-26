@@ -1,0 +1,3 @@
+dark blue = #246596
+light blue (backround) = #e5f4ff
+green = #20ad8a

@@ -60,3 +60,16 @@ export async function generateYesNoQuestions(topic, limit = 10) {
     console.log(json_results);
     return json_results;
 }
+
+export async function generateSummary({ original_prompt, answers }) {
+    const prompt = `
+    Given this original prompt ${original_prompt} from a patient, he has answered the following questions: ${answers}.
+    Please generate a description of the patient's symptoms in order for a potential doctor to better analyze the patient.
+    Also think of a degree of urgency/severity from 1 to 10 - and potential further investigations.
+    Do not use any delimiters like \`\`\`json or other extra characters.
+`;
+    // Call the API and get the parsed JSON result
+    const json_results = await callChatGPTAPI(prompt);
+    console.log(json_results);
+    return json_results;
+}

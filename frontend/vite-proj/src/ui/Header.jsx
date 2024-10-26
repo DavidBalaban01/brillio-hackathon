@@ -16,7 +16,7 @@ export default function Header() {
             <Link to="/new" className="btn btn-primary">
               New Patient
             </Link>
-            <Link to="/existing" className="btn btn-secondary">
+            <Link to="/existing" className="btn btn-primary">
               Existing Patient
             </Link>
             <Link to="/doctor" className="btn btn-primary">

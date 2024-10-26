@@ -20,7 +20,8 @@
 }
 
 .btn-primary:hover {
-  @apply bg-blue-600 shadow-lg;
+  /* @apply bg-blue-600 shadow-lg; */
+  @apply bg-green-600 shadow-lg;
 }
 
 /* Secondary Button: Soothing green */

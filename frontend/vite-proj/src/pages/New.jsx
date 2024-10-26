@@ -4,6 +4,7 @@ import { generateYesNoQuestions } from "../services/apiGPT";
 import { useState } from "react";
 import Prompt from "./Prompt";
 import Question from "./question";
+import FinalLoad from "./FinalLoad";
 
 // const questionData = [
 //   "Does the pain worsen with activity or movement?",
@@ -77,6 +78,50 @@ export default function New() {
         />
       )}
       {/* {currentIndex == questionData.length+1 && ()} */}
+      <FinalLoad></FinalLoad>
     </Container>
+
+
+    // <Container>
+    //   {/* <header className="mb-6">
+    //     <h1 className="font-title mb-2 text-2xl text-neutral-950">
+    //       Title Goes Here
+    //     </h1>
+    //     <p className="text-lg text-neutral-700">
+    //       This is the subtitle explaining the content.
+    //     </p>
+    //   </header>
+    //   <div className="grid grid-cols-2 gap-8">
+    //     <div className="flex flex-col justify-start">
+    //       <textarea
+    //         rows="3"
+    //         placeholder="Enter your text..."
+    //         className="mb-4 rounded-xl border border-neutral-300 p-2 text-neutral-950"
+    //         onChange={(e) => setInputText(e.target.value)}
+    //       />
+    //       <button
+    //         className="btn btn-primary"
+    //         disabled={loading}
+    //         onClick={handleGenerateQuestions}
+    //       >
+    //         {loading ? "Loading..." : "Submit"}
+    //       </button>
+    //     </div>
+
+    //     <Survey questions={questionData} />
+    //     {/* <Survey questions={questions} /> */}
+    //   {/* </div> */}
+
+    //   {currentIndex == 0 && <Prompt onClick={handleNextClick} />}
+    //   {currentIndex > 0 && (
+    //     <Question
+    //       currentIndex={currentIndex}
+    //       nextClick={handleNextClick}
+    //       backClick={handleBackClick}
+    //       question={questionData[currentIndex]}
+    //     />
+    //   )}
+    //   {/* {currentIndex == questionData.length+1 && ()} */}
+    // </Container>
   );
 }

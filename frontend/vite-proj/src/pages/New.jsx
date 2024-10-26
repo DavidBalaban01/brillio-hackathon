@@ -54,9 +54,10 @@ export default function New() {
             rows="3"
             placeholder="Enter your text..."
             className="mb-4 rounded-xl border border-neutral-300 p-2 text-neutral-950"
+            onChange={(e) => setInputText(e.target.value)}
           />
           <button className="btn btn-primary" disabled={loading} onClick={handleGenerateQuestions}>
-            {loading ? 'Generating...' : 'Submit'}
+            {loading ? 'Loading...' : 'Submit'}
           </button>
         </div>
 

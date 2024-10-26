@@ -5,7 +5,7 @@ export default function AppLayout() {
   return (
     <>
       <Header />
-      <main className="p-8">
+      <main className="bg-blue-100 p-8">
         <Outlet />
       </main>
     </>

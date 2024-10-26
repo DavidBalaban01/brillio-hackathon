@@ -61,6 +61,8 @@ export default function New() {
   }
 
   console.log("answers", answers);
+  console.log("currentIndex", currentIndex);
+  console.log("questions.length", questions.length);
 
   return (
     <Container>
@@ -68,9 +70,7 @@ export default function New() {
         <Prompt onClick={handleNextClick} onChange={setInputText} />
       )}
       {loading && <FinalLoad />}
-      {/* <FinalLoad /> */}
-      {/* {loading && <div>SPINNER</div>} */}
-      {currentIndex > 0 && (
+      {currentIndex > 0 && currentIndex < questions.length && (
         <Question
           currentIndex={currentIndex}
           nextClick={handleNextClick}
@@ -79,7 +79,7 @@ export default function New() {
           answers={answers}
         />
       )}
-      {/* {currentIndex == questionData.length+1 && ()} */}
+      {currentIndex > questions.length && <div>Final</div>}
     </Container>
 
     // <Container>

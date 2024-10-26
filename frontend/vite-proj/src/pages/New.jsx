@@ -1,5 +1,7 @@
 import Container from "../ui/Container";
 import Survey from "../ui/Survey";
+import { generateYesNoQuestions } from '../services/apiGPT';
+import { useState } from "react";
 
 const questionData = [
   {
@@ -19,6 +21,23 @@ const questionData = [
 ];
 
 export default function New() {
+
+  const [inputText, setInputText] = useState('');
+  const [questions, setQuestions] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleGenerateQuestions = async () => {
+    setLoading(true);
+    try {
+      const generatedQuestions = await generateYesNoQuestions(inputText);
+      setQuestions(generatedQuestions);
+    } catch (error) {
+      console.error("Failed to fetch questions:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <Container>
       <header className="mb-6">
@@ -36,7 +55,9 @@ export default function New() {
             placeholder="Enter your text..."
             className="mb-4 rounded-xl border border-neutral-300 p-2 text-neutral-950"
           />
-          <button className="btn btn-primary">Submit</button>
+          <button className="btn btn-primary" disabled={loading} onClick={handleGenerateQuestions}>
+            {loading ? 'Generating...' : 'Submit'}
+          </button>
         </div>
 
         <Survey questions={questionData} />

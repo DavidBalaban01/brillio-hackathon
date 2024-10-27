@@ -1,6 +1,6 @@
 import Container from "../ui/Container";
 import Survey from "../ui/Survey";
-import { generateYesNoQuestions } from "../services/apiGPT";
+import { generateYesNoQuestions, generateSummary } from "../services/apiGPT";
 import { useState } from "react";
 import Prompt from "./Prompt";
 import Question from "./question";
@@ -13,6 +13,7 @@ export default function New() {
   const [answers, setAnswers] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [finished, setFinished] = useState(false);
+  const [finalSurvey, setFinalSurvey] = useState();
 
   const handleGenerateQuestions = async (onComplete) => {
     setLoading(true);
@@ -41,6 +42,12 @@ export default function New() {
     answers[currentIndex - 1] = answer;
     if (currentIndex == questions.length) {
       console.log("finished");
+      setFinalSurvey(
+        questions
+          .map((item, index) => item + " " + answers[index] + ";")
+          .join("\n"),
+      );
+
       setFinished(true);
     }
     setCurrentIndex(currentIndex + 1);
@@ -52,12 +59,13 @@ export default function New() {
   }
 
   console.log("answers", answers);
-  console.log("currentIndex", currentIndex);
-  console.log("questions.length", questions.length);
 
-  // To do
-  // Concatenat raspunsuri cu intrebari
-  // Final Load unde apelam generateSummary
+  if (finished) {
+    console.log("finalSurvey", finalSurvey);
+    console.log("inputText", inputText);
+    const final = generateSummary(inputText, finalSurvey);
+    console.log("final", final);
+  }
 
   return (
     <Container>

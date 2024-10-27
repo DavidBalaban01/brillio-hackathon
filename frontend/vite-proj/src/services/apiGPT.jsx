@@ -1,4 +1,4 @@
-async function callChatGPTAPI(prompt) {
+async function callChatGPTAPI(prompt, parseJson = true) {
   const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
   const apiUrl = "https://api.openai.com/v1/chat/completions";
 
@@ -33,7 +33,11 @@ async function callChatGPTAPI(prompt) {
     // Validate and parse JSON
     let parsedContent;
     try {
-      parsedContent = JSON.parse(content.trim());
+      if (parseJson) {
+        parsedContent = JSON.parse(content.trim());
+      } else {
+        return content;
+      }
     } catch (parseError) {
       console.error("Failed to parse JSON response from ChatGPT:", parseError);
       throw new Error("Failed to parse JSON response from ChatGPT.");
@@ -61,15 +65,17 @@ export async function generateYesNoQuestions(topic, limit = 4) {
   return json_results;
 }
 
-export async function generateSummary({ original_prompt, answers }) {
+export async function generateSummary(original_prompt, answers) {
   const prompt = `
     Given this original prompt ${original_prompt} from a patient, he has answered the following questions: ${answers}.
     Please generate a description of the patient's symptoms in order for a potential doctor to better analyze the patient.
     Also think of a degree of urgency/severity from 1 to 10 - and potential further investigations.
     Do not use any delimiters like \`\`\`json or other extra characters.
 `;
+
+  console.log("prompt", prompt);
   // Call the API and get the parsed JSON result
-  const json_results = await callChatGPTAPI(prompt);
+  const json_results = await callChatGPTAPI(prompt, false);
   console.log(json_results);
   return json_results;
 }

@@ -5,6 +5,7 @@ import { useState } from "react";
 import Prompt from "./Prompt";
 import Question from "./question";
 import FinalLoad from "./FinalLoad";
+import FinalLoad2 from "./FinalLoad2";
 
 export default function New() {
   const [inputText, setInputText] = useState("");
@@ -82,7 +83,7 @@ export default function New() {
           answers={answers}
         />
       )}
-      {finished && <FinalLoad />}
+      {finished && <FinalLoad2 />}
     </Container>
   );
 }

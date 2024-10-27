@@ -91,5 +91,39 @@ export async function generateCondition(text) {
   // Call the API and get the parsed JSON result
   const json_results = await callChatGPTAPI(prompt, false);
   console.log("CONDITION: " + json_results);
+
+  callPredictAPI(json_results)
   return json_results;
 }
+
+export async function callPredictAPI(medical_condition) {
+  const apiUrl = "https://3869-86-124-123-68.ngrok-free.app/predict";
+
+  const data = {
+    input_data: medical_condition,
+  };
+
+  try {
+    const response = await fetch(apiUrl, {
+      method: "POST", // Changed to POST
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data), // Send data in the request body
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Error ${response.status}: ${errorText}`);
+    }
+
+    // Parse the JSON response
+    const responseData = await response.json();
+    console.log("Response Data:", responseData);
+    return responseData; // Return the data for further use
+  } catch (error) {
+    console.error("Failed to fetch from Predict API:", error);
+    throw error; // Re-throw the error for the caller to handle
+  }
+}
+

@@ -11,10 +11,10 @@ export default function Prompt({ onClick, onChange }) {
         <div>
           <header className="mb-6">
             <h1 className="font-title mb-2 text-2xl text-neutral-950">
-              Title Goes Here
+              Welcome
             </h1>
             <p className="text-lg text-neutral-700">
-              This is the subtitle explaining the content.
+              Please describe shortly your medical issue
             </p>
           </header>
           <input

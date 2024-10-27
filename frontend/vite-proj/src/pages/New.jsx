@@ -1,6 +1,11 @@
 import Container from "../ui/Container";
 import Survey from "../ui/Survey";
-import { generateYesNoQuestions, generateSummary, callPredictAPI } from "../services/apiGPT";
+import {
+  generateYesNoQuestions,
+  generateSummary,
+  callPredictAPI,
+  generateCondition,
+} from "../services/apiGPT";
 import { useState } from "react";
 import Prompt from "./Prompt";
 import Question from "./question";
@@ -17,12 +22,11 @@ export default function New() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [finished, setFinished] = useState(false);
   const [finalSurvey, setFinalSurvey] = useState();
+  const [result, setResult] = useState();
 
   // callPredictAPI("Ankle sprain (disorder)");
 
-
   const handleGenerateQuestions = async (onComplete) => {
-
     setLoading(true);
     try {
       const generatedQuestions = await generateYesNoQuestions(inputText);
@@ -70,8 +74,23 @@ export default function New() {
   if (finished) {
     console.log("finalSurvey", finalSurvey);
     console.log("inputText", inputText);
-    const final = generateSummary(inputText, finalSurvey);
-    console.log("final", final);
+
+    async function executeFunctions() {
+      try {
+        const resultA = await generateSummary(inputText, finalSurvey); // Call functionA
+        const resultB = await generateCondition(resultA); // Pass result to functionB
+        const resultC = await callPredictAPI(resultB); // Pass result to functionC
+
+        console.log("RESULT", resultC); // Final result
+        setFinished(false);
+        setResult(resultC[0]);
+      } catch (error) {
+        console.error("Error occurred:", error);
+      }
+    }
+
+    // Execute the functions
+    executeFunctions();
   }
 
   return (
@@ -81,17 +100,20 @@ export default function New() {
       )}
 
       {loading && <FinalLoad />}
-      {currentIndex > 0 && currentIndex <= questions.length && !finished && (
-        <Question
-          currentIndex={currentIndex}
-          nextClick={handleNextClick}
-          backClick={handleBackClick}
-          question={questions[currentIndex - 1]}
-          answers={answers}
-        />
-      )}
-      {finished && <FinalLoad2 />}
-      {/* {currentIndex == 0 && <Recommend />} */}
+      {currentIndex > 0 &&
+        currentIndex <= questions.length &&
+        !finished &&
+        !result && (
+          <Question
+            currentIndex={currentIndex}
+            nextClick={handleNextClick}
+            backClick={handleBackClick}
+            question={questions[currentIndex - 1]}
+            answers={answers}
+          />
+        )}
+      {finished && !result && <FinalLoad2 />}
+      {result && <Recommend doctor={result} />}
     </Container>
   );
 }

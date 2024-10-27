@@ -14,7 +14,7 @@ export default function Recommend({ doctor }) {
       }}
     >
       <h2>We recommend to go to this doctor</h2>
-      <h1>DOCTOR{doctor}</h1>
+      <h1 className="font-title mb-2 text-2xl text-neutral-950">{doctor}</h1>
     </div>
   );
 }

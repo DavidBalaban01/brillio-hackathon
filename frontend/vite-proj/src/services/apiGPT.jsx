@@ -50,7 +50,7 @@ async function callChatGPTAPI(prompt, parseJson = true) {
   }
 }
 // Function to generate yes/no questions
-export async function generateYesNoQuestions(topic, limit = 4) {
+export async function generateYesNoQuestions(topic, limit = 5) {
   const prompt = `
     Generate a list of ${limit} yes/no (very important) questions that could help a medical professional investigate symptoms related to "${topic}".
     The questions should clarify associated symptoms, potential causes, or factors that may narrow down the diagnosis.
@@ -73,12 +73,12 @@ export async function generateSummary(original_prompt, answers) {
     Do not use any delimiters like \`\`\`json or other extra characters.
 `;
 
-  console.log("prompt", prompt);
+  console.log("generate", prompt);
   // Call the API and get the parsed JSON result
   const json_results = await callChatGPTAPI(prompt, false);
-  console.log("SUMMARY: " + json_results);
+  // console.log("SUMMARY: " + json_results);
 
-  generateCondition(json_results)
+  // generateCondition(json_results)
   return json_results;
 }
 
@@ -92,7 +92,7 @@ export async function generateCondition(text) {
   const json_results = await callChatGPTAPI(prompt, false);
   console.log("CONDITION: " + json_results);
 
-  callPredictAPI(json_results)
+  // callPredictAPI(json_results)
   return json_results;
 }
 
@@ -126,4 +126,3 @@ export async function callPredictAPI(medical_condition) {
     throw error; // Re-throw the error for the caller to handle
   }
 }
-

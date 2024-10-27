@@ -5,6 +5,7 @@ import { useState } from "react";
 import Prompt from "./Prompt";
 import Question from "./question";
 import FinalLoad from "./FinalLoad";
+import ModelViewer from "./ModelViewer";
 
 export default function New() {
   const [inputText, setInputText] = useState("");
@@ -83,6 +84,8 @@ export default function New() {
         />
       )}
       {finished && <FinalLoad />}
+      {/* {currentIndex == questionData.length+1 && ()} */}
+      <ModelViewer></ModelViewer>
     </Container>
   );
 }

@@ -102,7 +102,7 @@ export default function Existing() {
               className="font-title mb-2 text-2xl text-neutral-950"
               style={{ marginBottom: "2rem" }}
             >
-              Here you can see all ":?your medical history
+              Here you can see all your medical history
             </h1>
             <table className="table">
               <thead>

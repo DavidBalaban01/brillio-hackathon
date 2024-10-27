@@ -7,6 +7,7 @@ import Question from "./question";
 import FinalLoad from "./FinalLoad";
 import FinalLoad2 from "./FinalLoad2";
 import ModelViewer from "./ModelViewer";
+import Recommend from "./Recommend";
 
 export default function New() {
   const [inputText, setInputText] = useState("");
@@ -74,6 +75,7 @@ export default function New() {
       {currentIndex == 0 && !loading && (
         <Prompt onClick={handleNextClick} onChange={setInputText} />
       )}
+
       {loading && <FinalLoad />}
       {currentIndex > 0 && currentIndex <= questions.length && !finished && (
         <Question
@@ -85,8 +87,7 @@ export default function New() {
         />
       )}
       {finished && <FinalLoad2 />}
-      {/* {currentIndex == questionData.length+1 && ()} */}
-      <ModelViewer></ModelViewer>
+      {/* {currentIndex == 0 && <Recommend />} */}
     </Container>
   );
 }

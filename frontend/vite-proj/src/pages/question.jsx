@@ -2,12 +2,7 @@ import { useState } from "react";
 
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
-export default function Question({
-  nextClick,
-  backClick,
-  question,
-  answers,
-}) {
+export default function Question({ nextClick, backClick, question, answers }) {
   const [answer, setAnswer] = useState("");
   const [tempAnswer, setTempAnswer] = useState("");
 
@@ -18,7 +13,18 @@ export default function Question({
   }
 
   return (
-    <div className="h-[250px] w-[400px] rounded-lg bg-white p-6">
+    <div
+      className="flex gap-3 rounded-lg bg-white p-6"
+      style={{
+        width: "700px",
+        height: "500px",
+        margin: "0px auto",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      {/* <div style={{ display: "flex" }}> */}
       <h2 className="font-title mb-4 text-xl text-neutral-950">{question}</h2>
       {/* <h2 className="font-title mb-4 text-xl text-neutral-950">
         Does the pain worsen with activity or movement?
@@ -48,7 +54,7 @@ export default function Question({
         </label>
       </div>
 
-      <div className="mt-10 flex justify-between">
+      <div className="mt-10 flex justify-between gap-3">
         <button
           className="btn btn-primary flex h-[40px] w-[40px] flex-row items-center justify-center rounded-full p-2"
           onClick={backClick}
@@ -68,5 +74,6 @@ export default function Question({
         </button>
       </div>
     </div>
+    // </div>
   );
 }

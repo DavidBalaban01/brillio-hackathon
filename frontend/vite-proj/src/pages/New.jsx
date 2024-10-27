@@ -1,6 +1,6 @@
 import Container from "../ui/Container";
 import Survey from "../ui/Survey";
-import { generateYesNoQuestions, generateSummary } from "../services/apiGPT";
+import { generateYesNoQuestions, generateSummary, callPredictAPI } from "../services/apiGPT";
 import { useState } from "react";
 import Prompt from "./Prompt";
 import Question from "./question";
@@ -18,7 +18,11 @@ export default function New() {
   const [finished, setFinished] = useState(false);
   const [finalSurvey, setFinalSurvey] = useState();
 
+  // callPredictAPI("Ankle sprain (disorder)");
+
+
   const handleGenerateQuestions = async (onComplete) => {
+
     setLoading(true);
     try {
       const generatedQuestions = await generateYesNoQuestions(inputText);

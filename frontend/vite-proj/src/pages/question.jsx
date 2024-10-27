@@ -1,6 +1,8 @@
 import { useState } from "react";
 
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import SegmentedProgressBar from "./ProgressView";
+
 
 export default function Question({ nextClick, backClick, question, answers }) {
   const [answer, setAnswer] = useState("");
@@ -73,6 +75,11 @@ export default function Question({ nextClick, backClick, question, answers }) {
           </span>
         </button>
       </div>
+
+      <SegmentedProgressBar
+        totalSteps={5}
+        currentIndex={3}
+      />
     </div>
     // </div>
   );
